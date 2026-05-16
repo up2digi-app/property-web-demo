@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UP2 Residence One - Hunian Eksklusif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            400: '#4ade80',
+                            500: '#22c55e', 
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        dark: '#0f172a' /* Darker slate for premium feel */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+        }
+        .wa-float {
+            animation: bounce-slight 2s infinite ease-in-out;
+        }
+        @keyframes bounce-slight {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        /* Page transition styles */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+        }
+        .nav-link.active {
+            color: #16a34a;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-600 antialiased bg-gray-50/50 flex flex-col min-h-screen selection:bg-brand-500 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-gray-100/80 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center cursor-pointer group" onclick="navigate('home')">
+                    <div class="flex-shrink-0 flex items-center gap-3 transition-transform duration-300 group-hover:scale-105">
+                        <img src="https://lh3.googleusercontent.com/d/1r4OLymlwKHQuuNCIgdUVNAk7BLofBrUf" alt="UP2 Logo" class="h-10 w-auto object-contain">
+                        <span class="font-bold text-xl tracking-tight hidden sm:block text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">UP2 Residence One</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="navigate('home')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-all duration-300">Beranda</button>
+                    <button onclick="navigate('about')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-all duration-300">Tentang</button>
+                    <button onclick="navigate('properties')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-all duration-300">Properti</button>
+                    <button onclick="navigate('gallery')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-all duration-300">Galeri</button>
+                    <button onclick="navigate('blog')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-all duration-300">Blog</button>
+                    <button onclick="navigate('contact')" class="nav-link text-gray-600 hover:text-brand-600 font-medium transition-all duration-300">Kontak</button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-600 focus:outline-none p-2 transition-colors duration-300">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button onclick="navigate('home')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-all duration-300">Beranda</button>
+                <button onclick="navigate('about')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-all duration-300">Tentang Kami</button>
+                <button onclick="navigate('properties')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-all duration-300">Pilihan Properti</button>
+                <button onclick="navigate('gallery')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-all duration-300">Galeri</button>
+                <button onclick="navigate('blog')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-all duration-300">Blog & Promo</button>
+                <button onclick="navigate('contact')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-all duration-300">Kontak & Survei</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+        
+        <!-- ==================== HOME PAGE ==================== -->
+        <div id="page-home" class="page-section active">
+            <!-- Hero Section -->
+            <section class="relative pt-36 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+                        <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                            
+                            <!-- Modern SaaS Badge -->
+                            <div class="flex flex-col sm:items-center lg:items-start mb-8 gap-1.5">
+                                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/40 backdrop-blur-xl border border-brand-200 shadow-[0_0_15px_rgba(34,197,94,0.25)] text-brand-700 font-semibold text-sm transition-all duration-500 hover:shadow-[0_0_25px_rgba(34,197,94,0.4)] cursor-default">
+                                    <span class="relative flex h-2.5 w-2.5">
+                                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span>
+                                    </span>
+                                    Demo Template Website Property — UP2 WebKit
+                                </div>
+                                <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase pl-2 sm:pl-0 lg:pl-2">Part of UP2 Digital Ecosystem</span>
+                            </div>
+
+                            <h1 class="text-4xl tracking-tight font-extrabold text-dark sm:text-5xl md:text-6xl lg:leading-tight">
+                                Temukan Hunian <br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-dark to-brand-600">Impian Keluarga</span>
+                            </h1>
+                            <p class="mt-6 text-base text-gray-500 sm:text-lg md:text-xl lg:max-w-lg leading-relaxed">
+                                Eksplorasi berbagai pilihan rumah dan cluster terbaik dengan fasilitas premium, desain modern, dan kemudahan akses di UP2 Residence One.
+                            </p>
+                            <div class="mt-10 flex flex-col sm:flex-row gap-4 sm:justify-center lg:justify-start">
+                                <button onclick="navigate('properties')" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-white bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 transition-all duration-300 shadow-[0_8px_20px_rgba(34,197,94,0.3)] hover:shadow-[0_12px_25px_rgba(34,197,94,0.5)] transform hover:-translate-y-1">
+                                    Lihat Unit Sekarang <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                                <a href="https://wa.link/i8w855" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-gray-200 text-base font-bold rounded-full text-dark bg-white hover:bg-gray-50 hover:border-brand-300 hover:text-brand-600 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-1">
+                                    <i class="fab fa-whatsapp text-brand-500 text-xl mr-2"></i> Konsultasi via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-14 lg:mt-0 lg:col-span-6 relative">
+                            <!-- Background Glow Blob -->
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+                            
+                            <div class="relative mx-auto w-full rounded-[2rem] shadow-2xl overflow-hidden aspect-video lg:aspect-[4/3] ring-1 ring-black/5">
+                                <img class="w-full h-full object-cover hover:scale-110 transition-transform duration-[1.5s]" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Fasad">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Quick Features -->
+            <section class="py-20 bg-gray-50 border-t border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div class="group cursor-default">
+                            <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-5 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                                <i class="fas fa-home text-2xl text-brand-500"></i>
+                            </div>
+                            <h3 class="font-bold text-dark text-lg mb-1">5+ Cluster</h3>
+                            <p class="text-sm text-gray-500">Pilihan Tipe Beragam</p>
+                        </div>
+                        <div class="group cursor-default">
+                            <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-5 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                                <i class="fas fa-map-marker-alt text-2xl text-brand-500"></i>
+                            </div>
+                            <h3 class="font-bold text-dark text-lg mb-1">Strategis</h3>
+                            <p class="text-sm text-gray-500">Dekat Tol & Stasiun</p>
+                        </div>
+                        <div class="group cursor-default">
+                            <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-5 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                                <i class="fas fa-shield-alt text-2xl text-brand-500"></i>
+                            </div>
+                            <h3 class="font-bold text-dark text-lg mb-1">Aman 24/7</h3>
+                            <p class="text-sm text-gray-500">One Gate System</p>
+                        </div>
+                        <div class="group cursor-default">
+                            <div class="w-16 h-16 mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-5 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                                <i class="fas fa-leaf text-2xl text-brand-500"></i>
+                            </div>
+                            <h3 class="font-bold text-dark text-lg mb-1">Asri & Hijau</h3>
+                            <p class="text-sm text-gray-500">Taman Tematik</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Akses & Mobilitas Section -->
+            <section class="py-24 bg-white border-t border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                        <!-- Left: Map -->
+                        <div class="rounded-[2rem] overflow-hidden shadow-2xl border border-gray-100 h-80 md:h-[500px] ring-1 ring-black/5 mb-12 lg:mb-0 relative group">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126907.0343468504!2d106.74495574335936!3d-6.284206599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f21221b0dc5f%3A0xc3e13024ebdb8106!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale group-hover:grayscale-0 transition-all duration-700"></iframe>
+                        </div>
+                        <!-- Right: Content -->
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-100 text-brand-600 font-bold text-xs uppercase tracking-wider mb-6">
+                                <i class="fas fa-map-marked-alt"></i> Akses & Mobilitas
+                            </div>
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight mb-6">
+                                Akses Mudah & <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700">Lokasi Strategis</span>
+                            </h2>
+                            <p class="text-gray-500 text-lg mb-8 leading-relaxed">
+                                Terletak di jantung kawasan berkembang dengan akses infrastruktur terbaik untuk mendukung mobilitas harian Anda dan keluarga dengan efisien.
+                            </p>
+                            <ul class="space-y-5">
+                                <li class="flex items-center bg-gray-50 p-5 rounded-2xl border border-gray-100 hover:border-brand-200 transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-md">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-5 text-xl">
+                                        <i class="fas fa-car-side"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark text-lg">5 Menit ke Pintu Tol</h4>
+                                        <p class="text-gray-500 text-sm mt-0.5">Akses mobilitas cepat ke pusat kota.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center bg-gray-50 p-5 rounded-2xl border border-gray-100 hover:border-brand-200 transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-md">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-5 text-xl">
+                                        <i class="fas fa-train"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark text-lg">10 Menit ke Stasiun KRL</h4>
+                                        <p class="text-gray-500 text-sm mt-0.5">Transportasi publik yang terintegrasi.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center bg-gray-50 p-5 rounded-2xl border border-gray-100 hover:border-brand-200 transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-md">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-5 text-xl">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-dark text-lg">Dekat Pusat Perbelanjaan</h4>
+                                        <p class="text-gray-500 text-sm mt-0.5">Memenuhi gaya hidup dan kebutuhan harian.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== ABOUT PAGE ==================== -->
+        <div id="page-about" class="page-section bg-white pt-32 pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Tentang UP2 Residence One</h2>
+                    <p class="mt-4 text-lg text-gray-500 max-w-3xl mx-auto">Kami adalah pengembang properti terpercaya yang berdedikasi membangun komunitas dan hunian modern berkualitas untuk masa depan keluarga Anda.</p>
+                </div>
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-400 to-brand-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="About Us" class="relative rounded-3xl shadow-xl w-full ring-1 ring-gray-900/5">
+                    </div>
+                    <div class="mt-12 lg:mt-0">
+                        <h3 class="text-2xl font-bold text-dark mb-4">Visi Kami</h3>
+                        <p class="text-gray-600 mb-10 leading-relaxed text-lg">Menjadi pelopor hunian berkonsep <span class="font-semibold text-brand-600">smart & green living</span> yang terjangkau namun memiliki nilai investasi tinggi di wilayah yang sedang berkembang pesat.</p>
+                        
+                        <h3 class="text-2xl font-bold text-dark mb-6">Kenapa Memilih Kami?</h3>
+                        <ul class="space-y-6">
+                            <li class="flex items-start bg-gray-50 p-4 rounded-2xl border border-gray-100 hover:border-brand-200 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-4">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-dark">Legalitas Terjamin</h4>
+                                    <p class="text-gray-500 text-sm mt-1">SHM dan IMB sudah pecah per kavling.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start bg-gray-50 p-4 rounded-2xl border border-gray-100 hover:border-brand-200 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-4">
+                                    <i class="fas fa-hammer"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-dark">Kualitas Bangunan</h4>
+                                    <p class="text-gray-500 text-sm mt-1">Material spesifikasi tinggi dan kontraktor berpengalaman.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start bg-gray-50 p-4 rounded-2xl border border-gray-100 hover:border-brand-200 transition-colors duration-300">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-4">
+                                    <i class="fas fa-swimming-pool"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-dark">Fasilitas Lengkap</h4>
+                                    <p class="text-gray-500 text-sm mt-1">Sarana ibadah, taman bermain, dan area olahraga.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PROPERTIES LIST PAGE ==================== -->
+        <div id="page-properties" class="page-section bg-gray-50 pt-32 pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- NEW SECTION: Why Choose Us (Kenapa Memilih UP2 Residence One?) -->
+                <div class="mb-28">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4 tracking-tight">Kenapa Memilih UP2 Residence One?</h2>
+                        <p class="text-gray-500 text-lg">Keunggulan eksklusif yang menjamin kenyamanan dan prospek masa depan investasi keluarga Anda.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                        <!-- Card 1 -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-brand-200 hover:shadow-[0_8px_30px_rgba(34,197,94,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 group cursor-default">
+                            <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <i class="fas fa-file-signature"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Legalitas Lengkap</h3>
+                            <p class="text-gray-500 leading-relaxed text-sm">SHM & IMB Aman dan sudah dipecah per kavling.</p>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-brand-200 hover:shadow-[0_8px_30px_rgba(34,197,94,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 group cursor-default">
+                            <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Lokasi Strategis</h3>
+                            <p class="text-gray-500 leading-relaxed text-sm">Dekat gerbang Tol, Stasiun, dan akses cepat ke Pusat Kota.</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-brand-200 hover:shadow-[0_8px_30px_rgba(34,197,94,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 group cursor-default">
+                            <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Keamanan 24 Jam</h3>
+                            <p class="text-gray-500 leading-relaxed text-sm">One Gate System berpadu dengan pengawasan CCTV interaktif.</p>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-brand-200 hover:shadow-[0_8px_30px_rgba(34,197,94,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 group cursor-default">
+                            <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Lingkungan Asri</h3>
+                            <p class="text-gray-500 leading-relaxed text-sm">Taman Hijau tematik dan ruang terbuka yang nyaman untuk Keluarga.</p>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-brand-200 hover:shadow-[0_8px_30px_rgba(34,197,94,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 group cursor-default">
+                            <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Investasi Menjanjikan</h3>
+                            <p class="text-gray-500 leading-relaxed text-sm">Potensi kenaikan nilai properti yang pesat di kawasan Sunrise Property.</p>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:border-brand-200 hover:shadow-[0_8px_30px_rgba(34,197,94,0.12)] transition-all duration-300 transform hover:-translate-y-1.5 group cursor-default">
+                            <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-2">Fasilitas Lengkap</h3>
+                            <p class="text-gray-500 leading-relaxed text-sm">Dilengkapi fasilitas publik internal seperti Masjid, Playground, dan Area Olahraga.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtle Divider -->
+                <div class="w-full max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-20"></div>
+
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Daftar Properti</h2>
+                        <p class="mt-2 text-gray-500 text-lg">Temukan unit yang sesuai dengan budget dan kebutuhan Anda.</p>
+                    </div>
+                    <!-- Smart Filter -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap gap-4 w-full md:w-auto">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase tracking-wider">Filter Harga</label>
+                            <select id="filter-price" class="bg-gray-50 border border-gray-200 text-dark rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none w-full md:w-48 transition-colors duration-300" onchange="renderProperties()">
+                                <option value="all">Semua Harga</option>
+                                <option value="500000000">< Rp 500 Juta</option>
+                                <option value="800000000">< Rp 800 Juta</option>
+                                <option value="1500000000">< Rp 1.5 Miliar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase tracking-wider">Filter Cluster</label>
+                            <select id="filter-cluster" class="bg-gray-50 border border-gray-200 text-dark rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none w-full md:w-48 transition-colors duration-300" onchange="renderProperties()">
+                                <option value="all">Semua Cluster</option>
+                                <option value="Cluster Magnolia">Cluster Magnolia</option>
+                                <option value="Cluster Pinewood">Cluster Pinewood</option>
+                                <option value="Cluster Roseville">Cluster Roseville</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Properties Grid rendered by JS -->
+                <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cards injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PROPERTY DETAIL PAGE ==================== -->
+        <div id="page-detail" class="page-section bg-white pt-32 pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <button onclick="navigate('properties')" class="text-gray-500 font-semibold mb-8 hover:text-brand-600 inline-flex items-center gap-2 transition-colors duration-300 bg-gray-50 hover:bg-brand-50 px-4 py-2 rounded-full border border-gray-100">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Daftar
+                </button>
+
+                <div class="lg:grid lg:grid-cols-2 lg:gap-14">
+                    <!-- Left: Images -->
+                    <div>
+                        <div class="rounded-[2rem] overflow-hidden shadow-xl h-80 md:h-[450px] mb-6 ring-1 ring-black/5">
+                            <img id="detail-img" src="" alt="Property" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <!-- Mini Gallery (Static for demo) -->
+                        <div class="grid grid-cols-3 gap-4">
+                            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=400&q=80" class="rounded-2xl h-28 w-full object-cover shadow-sm border border-gray-100 hover:opacity-80 transition-opacity cursor-pointer">
+                            <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=400&q=80" class="rounded-2xl h-28 w-full object-cover shadow-sm border border-gray-100 hover:opacity-80 transition-opacity cursor-pointer">
+                            <div class="rounded-2xl h-28 w-full object-cover shadow-inner bg-gray-100 hover:bg-gray-200 transition-colors flex items-center justify-center cursor-pointer border border-gray-200">
+                                <span class="font-bold text-gray-500">+5 Foto</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info & KPR -->
+                    <div class="mt-10 lg:mt-0">
+                        <div class="inline-block bg-brand-50 border border-brand-100 text-brand-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4" id="detail-cluster">Cluster Name</div>
+                        <h2 id="detail-title" class="text-3xl md:text-4xl font-extrabold text-dark mb-2 tracking-tight">Tipe Rumah</h2>
+                        <p id="detail-price" class="text-3xl font-bold text-brand-500 mb-8">Rp 0</p>
+
+                        <div class="grid grid-cols-3 gap-4 py-6 border-t border-b border-gray-100 mb-8">
+                            <div class="text-center">
+                                <div class="w-10 h-10 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-2">
+                                    <i class="fas fa-bed text-gray-400 text-lg"></i>
+                                </div>
+                                <p id="detail-bed" class="text-sm font-semibold text-dark">0 Kamar</p>
+                            </div>
+                            <div class="text-center border-l border-gray-100">
+                                <div class="w-10 h-10 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-2">
+                                    <i class="fas fa-bath text-gray-400 text-lg"></i>
+                                </div>
+                                <p id="detail-bath" class="text-sm font-semibold text-dark">0 K.Mandi</p>
+                            </div>
+                            <div class="text-center border-l border-gray-100">
+                                <div class="w-10 h-10 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-2">
+                                    <i class="fas fa-vector-square text-gray-400 text-lg"></i>
+                                </div>
+                                <p id="detail-area" class="text-sm font-semibold text-dark">LB/LT: 0/0</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-10">
+                            <h3 class="font-bold text-xl text-dark mb-3">Deskripsi Lengkap</h3>
+                            <p id="detail-desc" class="text-gray-500 leading-relaxed">Deskripsi rumah akan muncul di sini.</p>
+                        </div>
+
+                        <!-- KPR Calculator Section -->
+                        <div class="bg-gray-50/80 p-8 rounded-3xl border border-gray-100 mb-8 shadow-sm">
+                            <h3 class="font-bold text-lg text-dark mb-5 flex items-center"><i class="fas fa-calculator text-brand-500 mr-3 text-xl"></i> Simulasi KPR</h3>
+                            <div class="grid grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">DP (Uang Muka) %</label>
+                                    <input type="number" id="kpr-dp" value="10" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-colors" oninput="calculateKPR()">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">Tenor (Tahun)</label>
+                                    <select id="kpr-tenor" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-colors" onchange="calculateKPR()">
+                                        <option value="10">10 Tahun</option>
+                                        <option value="15" selected>15 Tahun</option>
+                                        <option value="20">20 Tahun</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-5 rounded-2xl border border-gray-100 shadow-sm gap-2">
+                                <span class="text-gray-500 font-medium">Estimasi Cicilan:</span>
+                                <span id="kpr-result" class="text-2xl font-bold text-brand-600">Rp 0 / bln</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-3">*Simulasi menggunakan suku bunga asumsi 5% per tahun.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <a href="https://wa.link/i8w855" target="_blank" class="w-full flex justify-center items-center px-4 py-4 rounded-xl shadow-[0_4px_15px_rgba(34,197,94,0.25)] hover:shadow-[0_8px_25px_rgba(34,197,94,0.4)] text-sm font-bold text-white bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 transition-all duration-300 transform hover:-translate-y-1">
+                                Tanya Harga Promo <i class="fab fa-whatsapp ml-2 text-lg"></i>
+                            </a>
+                            <button onclick="navigate('contact')" class="w-full flex justify-center items-center px-4 py-4 border border-gray-200 rounded-xl shadow-sm hover:shadow-md text-sm font-bold text-dark bg-white hover:border-brand-400 hover:text-brand-600 transition-all duration-300 transform hover:-translate-y-1">
+                                Booking Survei Unit <i class="fas fa-calendar-check ml-2 text-lg"></i>
+                            </button>
+                            <a href="https://wa.link/i8w855" target="_blank" class="w-full sm:col-span-2 flex justify-center items-center px-4 py-3.5 rounded-xl text-sm font-bold text-brand-700 bg-brand-50 hover:bg-brand-100 transition-colors duration-300 border border-brand-100 mt-2">
+                                Konsultasi KPR <i class="fas fa-calculator ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== GALLERY PAGE ==================== -->
+        <div id="page-gallery" class="page-section bg-gray-50 pt-32 pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Galeri Fasilitas & Lingkungan</h2>
+                    <p class="mt-4 text-gray-500 text-lg">Melihat lebih dekat lingkungan asri di UP2 Residence One.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
+                    <div class="rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" class="w-full h-48 md:h-72 object-cover hover:scale-110 transition-transform duration-[2s] cursor-pointer">
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="w-full h-48 md:h-72 object-cover hover:scale-110 transition-transform duration-[2s] cursor-pointer">
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80" class="w-full h-48 md:h-72 object-cover hover:scale-110 transition-transform duration-[2s] cursor-pointer">
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80" class="w-full h-48 md:h-72 object-cover hover:scale-110 transition-transform duration-[2s] cursor-pointer">
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 md:col-span-2">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80" class="w-full h-48 md:h-72 object-cover hover:scale-110 transition-transform duration-[2s] cursor-pointer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BLOG PAGE ==================== -->
+        <div id="page-blog" class="page-section bg-white pt-32 pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Blog & Promo Terkini</h2>
+                    <p class="mt-4 text-gray-500 text-lg">Berita terbaru dan tips seputar dunia properti.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Blog 1: Promo -->
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-brand-200 transition-all duration-300 transform hover:-translate-y-2 group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-[1.5s]">
+                        </div>
+                        <div class="p-8">
+                            <span class="inline-block bg-brand-50 text-brand-600 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">Promo</span>
+                            <h3 class="text-xl font-bold text-dark mt-1 mb-3 group-hover:text-brand-600 transition-colors">Promo DP 0% Pembelian di Bulan Ini!</h3>
+                            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Dapatkan kemudahan memiliki rumah tanpa DP khusus untuk 5 pembeli pertama.</p>
+                            <button onclick="openBlogDetail(1)" class="inline-flex items-center text-brand-600 font-bold hover:text-brand-700 transition-colors group/btn">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ml-2 transform group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Blog 2: Tips & Trik -->
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-blue-200 transition-all duration-300 transform hover:-translate-y-2 group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-[1.5s]">
+                        </div>
+                        <div class="p-8">
+                            <span class="inline-block bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">Tips & Trik</span>
+                            <h3 class="text-xl font-bold text-dark mt-1 mb-3 group-hover:text-blue-600 transition-colors">5 Dokumen Penting Persiapan KPR</h3>
+                            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Jangan sampai KPR ditolak, persiapkan berkas-berkas ini sebelum pengajuan ke bank.</p>
+                            <button onclick="openBlogDetail(2)" class="inline-flex items-center text-blue-600 font-bold hover:text-blue-700 transition-colors group/btn">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ml-2 transform group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Blog 3: Desain -->
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-2 group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-[1.5s]">
+                        </div>
+                        <div class="p-8">
+                            <span class="inline-block bg-purple-50 text-purple-600 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3">Desain</span>
+                            <h3 class="text-xl font-bold text-dark mt-1 mb-3 group-hover:text-purple-600 transition-colors">Inspirasi Dekorasi Interior Minimalis</h3>
+                            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Sulap rumah Tipe 36 Anda agar terlihat lebih luas dengan trik dekorasi berikut.</p>
+                            <button onclick="openBlogDetail(3)" class="inline-flex items-center text-purple-600 font-bold hover:text-purple-700 transition-colors group/btn">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ml-2 transform group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BLOG DETAIL PAGE ==================== -->
+        <div id="page-blog-detail" class="page-section bg-white pt-32 pb-24">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <button onclick="navigate('blog')" class="text-gray-500 font-semibold mb-8 hover:text-brand-600 inline-flex items-center gap-2 transition-colors duration-300 bg-gray-50 hover:bg-brand-50 px-4 py-2 rounded-full border border-gray-100">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Blog
+                </button>
+                <div class="mb-10 text-center md:text-left">
+                    <span id="blog-detail-category" class="inline-block bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">Kategori</span>
+                    <h2 id="blog-detail-title" class="text-3xl md:text-5xl font-extrabold text-dark mb-4 tracking-tight leading-tight">Judul Artikel</h2>
+                    <p class="text-gray-400 text-sm font-medium"><i class="far fa-calendar-alt mr-2"></i> <span id="blog-detail-date">Tanggal</span></p>
+                </div>
+                <div class="rounded-3xl overflow-hidden mb-12 shadow-xl ring-1 ring-black/5">
+                    <img id="blog-detail-img" src="" alt="Blog Cover" class="w-full h-64 md:h-[500px] object-cover hover:scale-105 transition-transform duration-1000">
+                </div>
+                <div id="blog-detail-content" class="prose max-w-none text-gray-600 leading-loose text-lg mx-auto">
+                    <!-- Content injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CONTACT & FORM PAGE ==================== -->
+        <div id="page-contact" class="page-section bg-gray-50 pt-32 pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-dark tracking-tight">Hubungi Kami & Jadwalkan Survei</h2>
+                    <p class="mt-4 text-gray-500 text-lg">Isi formulir di bawah ini dan tim marketing kami akan segera menghubungi Anda.</p>
+                </div>
+                
+                <div class="lg:grid lg:grid-cols-12 lg:gap-12">
+                    <!-- Map & Info -->
+                    <div class="lg:col-span-5 mb-10 lg:mb-0">
+                        <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm mb-6 flex flex-col gap-4">
+                            <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl shadow-sm">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-dark text-xl mb-2">Kantor Pemasaran & Lokasi</h4>
+                                <p class="text-gray-500 leading-relaxed">Jl. Raya Boulevard UP2 No. 1, <br>Jakarta Selatan, 12345.</p>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden shadow-sm border border-gray-100 h-64 md:h-[400px] ring-1 ring-black/5">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126907.0343468504!2d106.74495574335936!3d-6.284206599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f21221b0dc5f%3A0xc3e13024ebdb8106!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale hover:grayscale-0 transition-all duration-500"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Lead Generation Form -->
+                    <div class="lg:col-span-7 bg-white p-8 md:p-10 rounded-[2rem] border border-gray-100 shadow-xl">
+                        <h3 class="text-2xl font-bold text-dark mb-8 tracking-tight">Form Jadwal Survei</h3>
+                        <form id="surveiForm" onsubmit="submitForm(event)">
+                            <div class="mb-5">
+                                <label class="block text-sm font-bold text-gray-600 mb-2 uppercase tracking-wider">Nama Lengkap</label>
+                                <input type="text" id="form-name" required class="w-full px-5 py-4 bg-gray-50 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white outline-none transition-all duration-300">
+                            </div>
+                            <div class="mb-5">
+                                <label class="block text-sm font-bold text-gray-600 mb-2 uppercase tracking-wider">Nomor WhatsApp</label>
+                                <input type="tel" id="form-wa" required placeholder="0812..." class="w-full px-5 py-4 bg-gray-50 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white outline-none transition-all duration-300">
+                            </div>
+                            <div class="mb-5">
+                                <label class="block text-sm font-bold text-gray-600 mb-2 uppercase tracking-wider">Pilih Properti Minat</label>
+                                <select id="form-prop" class="w-full px-5 py-4 bg-gray-50 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white outline-none transition-all duration-300 cursor-pointer">
+                                    <option>Belum Menentukan / Ingin Tanya Dulu</option>
+                                    <option>Tipe 36/60 - Cluster Magnolia</option>
+                                    <option>Tipe 45/72 - Cluster Magnolia</option>
+                                    <option>Tipe 60/90 - Cluster Pinewood</option>
+                                </select>
+                            </div>
+                            <div class="mb-10">
+                                <label class="block text-sm font-bold text-gray-600 mb-2 uppercase tracking-wider">Rencana Tanggal Survei</label>
+                                <input type="date" id="form-date" class="w-full px-5 py-4 bg-gray-50 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 focus:bg-white outline-none transition-all duration-300 cursor-pointer">
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-bold py-4 px-8 rounded-xl shadow-[0_8px_20px_rgba(34,197,94,0.3)] hover:shadow-[0_12px_25px_rgba(34,197,94,0.5)] transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-3">
+                                Jadwalkan Survei Sekarang <i class="fab fa-whatsapp text-xl"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Ecosystem Premium -->
+    <footer class="bg-dark text-white pt-16 pb-10 mt-auto border-t border-gray-800 relative overflow-hidden">
+        <!-- Glow accent -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent"></div>
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Ecosystem Branding Col -->
+                <div class="md:col-span-5 lg:col-span-6 flex flex-col items-start">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="https://lh3.googleusercontent.com/d/1r4OLymlwKHQuuNCIgdUVNAk7BLofBrUf" alt="UP2 Logo" class="h-10 w-auto object-contain brightness-0 invert opacity-90">
+                        <div>
+                            <div class="font-bold text-xl tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-white">UP2 Residence One</div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
+                        Modern website template untuk bisnis property, developer, dan perumahan modern. Dirancang khusus untuk performa tinggi dan konversi maksimal.
+                    </p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="md:col-span-3 lg:col-span-2">
+                    <h4 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest opacity-80">Navigasi</h4>
+                    <ul class="space-y-3">
+                        <li><button onclick="navigate('home')" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Beranda</button></li>
+                        <li><button onclick="navigate('properties')" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Properti</button></li>
+                        <li><button onclick="navigate('gallery')" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Galeri</button></li>
+                        <li><button onclick="navigate('contact')" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Kontak Kami</button></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media Col -->
+                <div class="md:col-span-4 lg:col-span-4 lg:text-right flex flex-col lg:items-end">
+                    <h4 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest opacity-80 lg:mb-5">Terhubung Dengan Kami</h4>
+                    <div class="flex gap-4">
+                        <a href="https://wa.link/i8w855" target="_blank" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-600 hover:border-brand-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] transform hover:-translate-y-1">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                        <a href="https://wa.link/i8w855" target="_blank" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="https://wa.link/i8w855" target="_blank" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright Border -->
+            <div class="pt-8 border-t border-gray-800/50 flex flex-col md:items-start items-center gap-1.5">
+                <div class="text-xs text-gray-500 font-medium tracking-wide">
+                    &copy; <span id="current-year">2026</span> UP2WebKit by UP2 Digi-App. All rights reserved.
+                </div>
+                <a href="https://wa.link/i8w855" target="_blank" class="text-[10px] tracking-widest text-brand-500 uppercase font-semibold opacity-80 hover:opacity-100 hover:text-brand-400 transition-all duration-300">
+                    Part of UP2 Digital Ecosystem
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Tooltip CTA -->
+    <div class="fixed bottom-16 right-6 z-[60] flex items-center group">
+        <div class="mr-4 px-5 py-2.5 bg-dark/95 backdrop-blur-sm text-white text-sm font-bold rounded-xl shadow-xl opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400 pointer-events-none whitespace-nowrap relative border border-white/10">
+            Chat Marketing
+            <span class="absolute top-1/2 -right-1 -translate-y-1/2 w-2.5 h-2.5 bg-dark/95 border-r border-t border-white/10 rotate-45 rounded-sm"></span>
+        </div>
+        <a href="https://wa.link/i8w855" target="_blank" class="bg-gradient-to-r from-brand-500 to-brand-600 text-white w-[60px] h-[60px] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:shadow-[0_0_35px_rgba(34,197,94,0.7)] transition-all duration-300 wa-float hover:scale-110 border-2 border-white/20">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </a>
+    </div>
+
+    <!-- Application JavaScript (SPA Simulator, Database, Features) -->
+    <script>
+        // Update current year dynamically
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // --- 1. MOCK DATABASE (JSON) ---
+        const propertiesData = [
+            {
+                id: 1,
+                title: "Tipe 36/60",
+                cluster: "Cluster Magnolia",
+                price: 450000000,
+                bed: 2, bath: 1, area: "36/60",
+                img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+                desc: "Rumah berdesain minimalis compact yang sangat cocok untuk keluarga muda atau pasangan milenial. Dilengkapi dengan 2 kamar tidur yang fungsional, ruang keluarga yang menyatu dengan ruang makan, serta sisa lahan di bagian belakang yang bisa dikembangkan."
+            },
+            {
+                id: 2,
+                title: "Tipe 45/72",
+                cluster: "Cluster Magnolia",
+                price: 650000000,
+                bed: 3, bath: 1, area: "45/72",
+                img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+                desc: "Hunian ideal bagi keluarga yang membutuhkan ruang lebih. Terdapat 3 kamar tidur yang nyaman dan sirkulasi udara yang dirancang optimal untuk gaya hidup sehat."
+            },
+            {
+                id: 3,
+                title: "Tipe 60/90 (2 Lantai)",
+                cluster: "Cluster Pinewood",
+                price: 950000000,
+                bed: 3, bath: 2, area: "60/90",
+                img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+                desc: "Rasakan kemewahan hunian 2 lantai dengan fasad elegan di Cluster Pinewood. Memiliki kamar utama yang luas dengan kamar mandi dalam, serta ruang keluarga ekstra di lantai 2."
+            },
+            {
+                id: 4,
+                title: "Tipe 80/120 Premium",
+                cluster: "Cluster Roseville",
+                price: 1350000000,
+                bed: 4, bath: 3, area: "80/120",
+                img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80",
+                desc: "Tipe paling eksklusif di UP2 Residence One. Dilengkapi dengan fitur smart home, kamar asisten rumah tangga terpisah, dan carport muat 2 mobil. Hunian prestise untuk kesuksesan Anda."
+            }
+        ];
+
+        const blogData = [
+            {
+                id: 1,
+                category: "Promo",
+                categoryColor: "text-brand-600 bg-brand-50",
+                title: "Promo DP 0% Pembelian di Bulan Ini!",
+                date: "12 Mei 2026",
+                img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
+                content: `<p class="mb-4">Kabar gembira bagi Anda yang sedang mencari hunian idaman! UP2 Residence One menghadirkan promo spesial di bulan ini: <strong>DP 0% alias Tanpa Uang Muka</strong>.</p><p class="mb-4">Promo ini khusus diberikan untuk 5 pembeli pertama yang melakukan booking fee pada bulan ini. Selain DP 0%, Anda juga akan mendapatkan keuntungan lain berupa:</p><ul class="list-disc pl-5 mb-4"><li>Gratis Biaya KPR</li><li>Gratis BPHTB</li><li>Gratis Biaya Notaris</li></ul><p>Jangan lewatkan kesempatan emas ini untuk memiliki rumah di lokasi strategis dengan cicilan ringan. Segera hubungi tim marketing kami untuk menjadwalkan survei dan mengamankan unit pilihan Anda!</p>`
+            },
+            {
+                id: 2,
+                category: "Tips & Trik",
+                categoryColor: "text-blue-600 bg-blue-50",
+                title: "5 Dokumen Penting Persiapan KPR",
+                date: "10 Mei 2026",
+                img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+                content: `<p class="mb-4">Mengajukan KPR (Kredit Pemilikan Rumah) memang membutuhkan persiapan, terutama kelengkapan dokumen. Agar proses pengajuan Anda ke bank berjalan lancar dan cepat disetujui, pastikan 5 dokumen ini sudah siap:</p><ol class="list-decimal pl-5 mb-4"><li><strong>KTP & NPWP:</strong> Dokumen identitas dasar yang wajib ada untuk suami dan istri (jika sudah menikah).</li><li><strong>Kartu Keluarga (KK) & Buku Nikah:</strong> Bukti status perkawinan dan tanggungan keluarga.</li><li><strong>Slip Gaji 3 Bulan Terakhir:</strong> Sebagai bukti penghasilan tetap bagi karyawan.</li><li><strong>Rekening Koran 3-6 Bulan Terakhir:</strong> Bank akan melihat mutasi rekening untuk menilai kesehatan finansial Anda.</li><li><strong>Surat Keterangan Kerja:</strong> Bukti bahwa Anda adalah karyawan tetap di perusahaan saat ini.</li></ol><p>Tim sales UP2 Residence One siap membantu Anda dalam proses pemberkasan hingga KPR disetujui. Konsultasikan profil keuangan Anda bersama kami secara gratis!</p>`
+            },
+            {
+                id: 3,
+                category: "Desain",
+                categoryColor: "text-purple-600 bg-purple-50",
+                title: "Inspirasi Dekorasi Interior Minimalis",
+                date: "05 Mei 2026",
+                img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
+                content: `<p class="mb-4">Memiliki rumah tipe 36 atau 45 bukan berarti Anda tidak bisa berkreasi dengan desain interior. Dengan sentuhan gaya minimalis, ruangan yang terbatas bisa terasa lebih luas dan nyaman.</p><p class="mb-4">Berikut adalah beberapa tips dekorasi yang bisa Anda terapkan:</p><ul class="list-disc pl-5 mb-4"><li><strong>Gunakan Warna Terang:</strong> Cat dinding dengan warna putih, krem, atau abu-abu muda untuk memantulkan cahaya dan memberi kesan lapang.</li><li><strong>Pilih Furnitur Multifungsi:</strong> Misalnya tempat tidur dengan laci penyimpanan di bawahnya, atau meja makan lipat.</li><li><strong>Maksimalkan Pencahayaan Alami:</strong> Biarkan sinar matahari masuk dengan menggunakan gorden tipis (vitrase). UP2 Residence One sudah didesain dengan jendela besar untuk hal ini.</li><li><strong>Pasang Cermin Besar:</strong> Cermin dapat memberikan ilusi optik membuat ruangan terasa dua kali lipat lebih besar.</li></ul><p>Semoga inspirasi ini membantu Anda menata hunian impian di UP2 Residence One menjadi lebih estetik dan homey!</p>`
+            }
+        ];
+
+        let currentActiveProperty = null; 
+
+        // --- 2. SINGLE PAGE APPLICATION (SPA) ROUTER ---
+        function navigate(pageId) {
+            // Sembunyikan semua page section
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Tampilkan page yang dituju
+            setTimeout(() => {
+                document.getElementById('page-' + pageId).classList.add('active');
+            }, 50); // slight delay for smooth reflow
+            
+            // Scroll ke atas dengan halus
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Update styling di navbar (Desktop)
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('onclick') === `Maps('${pageId}')`) { 
+                    link.classList.add('active');
+                }
+            });
+
+            // Jika membuka halaman properti, render list-nya
+            if(pageId === 'properties') {
+                renderProperties();
+            }
+
+            // Tutup menu mobile jika terbuka
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // --- 3. FILTER & RENDER PROPERTIES ---
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(angka);
+        }
+
+        function renderProperties() {
+            const grid = document.getElementById('properties-grid');
+            const maxPrice = document.getElementById('filter-price').value;
+            const cluster = document.getElementById('filter-cluster').value;
+            
+            grid.innerHTML = ''; // Kosongkan grid
+
+            propertiesData.forEach(prop => {
+                // Logika Filter
+                let passPrice = maxPrice === 'all' || prop.price <= parseInt(maxPrice);
+                let passCluster = cluster === 'all' || prop.cluster === cluster;
+
+                if(passPrice && passCluster) {
+                    const card = `
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-[0_15px_40px_rgba(0,0,0,0.08)] transition-all duration-500 border border-gray-100 group transform hover:-translate-y-2">
+                        <div class="relative h-64 overflow-hidden bg-gray-100">
+                            <img src="${prop.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]">
+                            <div class="absolute top-5 left-5 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-dark shadow-sm border border-white/20 uppercase tracking-wider">
+                                ${prop.cluster}
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-extrabold text-dark mb-1 group-hover:text-brand-600 transition-colors">${prop.title}</h3>
+                            <p class="text-xl font-bold text-brand-500 mb-6">${formatRupiah(prop.price)}</p>
+                            
+                            <div class="grid grid-cols-3 gap-3 py-5 border-t border-b border-gray-100 mb-6">
+                                <div class="text-center">
+                                    <i class="fas fa-bed text-gray-300 text-lg mb-2"></i>
+                                    <p class="text-xs font-bold text-dark">${prop.bed} KT</p>
+                                </div>
+                                <div class="text-center border-l border-gray-100">
+                                    <i class="fas fa-bath text-gray-300 text-lg mb-2"></i>
+                                    <p class="text-xs font-bold text-dark">${prop.bath} KM</p>
+                                </div>
+                                <div class="text-center border-l border-gray-100">
+                                    <i class="fas fa-vector-square text-gray-300 text-lg mb-2"></i>
+                                    <p class="text-xs font-bold text-dark">LB ${prop.area}</p>
+                                </div>
+                            </div>
+                            <button onclick="openDetail(${prop.id})" class="w-full py-4 rounded-xl border-2 border-brand-100 text-brand-600 font-bold hover:bg-brand-600 hover:border-brand-600 hover:text-white transition-all duration-300 flex justify-center items-center gap-2">
+                                Lihat Detail & Denah <i class="fas fa-arrow-right text-sm"></i>
+                            </button>
+                        </div>
+                    </div>`;
+                    grid.innerHTML += card;
+                }
+            });
+
+            if(grid.innerHTML === '') {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 px-4 bg-white rounded-3xl border border-gray-100 text-gray-500"><i class="fas fa-search text-4xl mb-4 text-gray-300 block"></i>Maaf, tidak ada properti yang cocok dengan filter Anda.</div>`;
+            }
+        }
+
+        // --- 4. PROPERTY DETAIL LOGIC ---
+        function openDetail(id) {
+            const prop = propertiesData.find(p => p.id === id);
+            if(prop) {
+                currentActiveProperty = prop;
+                
+                document.getElementById('detail-img').src = prop.img;
+                document.getElementById('detail-cluster').innerText = prop.cluster;
+                document.getElementById('detail-title').innerText = prop.title;
+                document.getElementById('detail-price').innerText = formatRupiah(prop.price);
+                document.getElementById('detail-bed').innerText = prop.bed + " Kamar";
+                document.getElementById('detail-bath').innerText = prop.bath + " K.Mandi";
+                document.getElementById('detail-area').innerText = "LB/LT: " + prop.area;
+                document.getElementById('detail-desc').innerText = prop.desc;
+
+                calculateKPR();
+                navigate('detail');
+            }
+        }
+
+        // --- 4.5 BLOG DETAIL LOGIC ---
+        function openBlogDetail(id) {
+            const blog = blogData.find(b => b.id === id);
+            if(blog) {
+                document.getElementById('blog-detail-category').innerText = blog.category;
+                document.getElementById('blog-detail-category').className = `inline-block text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4 ${blog.categoryColor}`;
+                document.getElementById('blog-detail-title').innerText = blog.title;
+                document.getElementById('blog-detail-date').innerText = blog.date;
+                document.getElementById('blog-detail-img').src = blog.img;
+                document.getElementById('blog-detail-content').innerHTML = blog.content;
+                navigate('blog-detail');
+            }
+        }
+
+        // --- 5. CALCULATOR KPR ---
+        function calculateKPR() {
+            if(!currentActiveProperty) return;
+            
+            const dpPercentage = parseFloat(document.getElementById('kpr-dp').value) / 100;
+            const tenorYears = parseInt(document.getElementById('kpr-tenor').value);
+            const harga = currentActiveProperty.price;
+            
+            const dpAmount = harga * dpPercentage;
+            const pokokHutang = harga - dpAmount;
+            
+            const bungaPertahun = 0.05; 
+            const totalBunga = pokokHutang * bungaPertahun * tenorYears;
+            const totalHutang = pokokHutang + totalBunga;
+            
+            const cicilanBulan = totalHutang / (tenorYears * 12);
+            
+            document.getElementById('kpr-result').innerText = formatRupiah(cicilanBulan) + " / bln";
+        }
+
+        // --- 6. LEAD GENERATION FORM ---
+        function submitForm(e) {
+            e.preventDefault(); 
+            
+            const name = document.getElementById('form-name').value;
+            const wa = document.getElementById('form-wa').value;
+            const prop = document.getElementById('form-prop').value;
+            const date = document.getElementById('form-date').value;
+
+            const message = `Halo Tim UP2 Residence One, saya ingin menjadwalkan survei. \n\n*Data Diri:*\nNama: ${name}\nNo WA: ${wa}\nMinat Properti: ${prop}\nRencana Tanggal: ${date}\n\nMohon info selanjutnya, terima kasih.`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.link/i8w855?text=${encodedMessage}`, '_blank');
+        }
+
+        // Nav toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+    </script>
+</body>
+</html>
